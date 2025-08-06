@@ -5,17 +5,25 @@ type SheetData = {
   [key: string]: string | number;
 };
 
-const API_URL = "https://script.google.com/macros/s/AKfycbyVDQnlu9uHkVa8IV_oOwAfNoI_zA2Nih5FiwlJEZVJWkDLzAV3RZMHfN3zcDxSx1-1/exec";
+// URL base sin el parámetro ?sheet=
+const BASE_API_URL = "https://script.google.com/macros/s/AKfycbyVDQnlu9uHkVa8IV_oOwAfNoI_zA2Nih5FiwlJEZVJWkDLzAV3RZMHfN3zcDxSx1-1/exec";
 
-export const useGoogleSheet = () => {
+// Hook que recibe el nombre de la solapa como argumento
+export const useGoogleSheet = (sheetName: string = "Hoja1") => {
+
   const [data, setData] = useState<SheetData[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true);
+      setError(null);
+
       try {
-        const response = await axios.get<SheetData[]>(API_URL, {
+        const url = `${BASE_API_URL}?sheet=${encodeURIComponent(sheetName)}`;
+        console.log("url", url);
+        const response = await axios.get<SheetData[]>(url, {
           headers: {
             'Accept': 'application/json',
           },
@@ -23,20 +31,20 @@ export const useGoogleSheet = () => {
             try {
               return JSON.parse(data);
             } catch (e) {
-              console.error(e);
+              console.error("Error parsing response:", e);
               return data;
             }
           }]
         });
-        
+
         if (Array.isArray(response.data)) {
           setData(response.data);
         } else {
-          console.error(response.data);
-          setError(response.data);
+          console.error("Unexpected response format:", response.data);
+          setError("Formato inesperado de los datos");
         }
       } catch (err) {
-        console.error(err);
+        console.error("Error fetching data:", err);
         setError(err as string);
       } finally {
         setLoading(false);
@@ -44,7 +52,7 @@ export const useGoogleSheet = () => {
     };
 
     fetchData();
-  }, []);
+  }, [sheetName]);
 
   return { data, loading, error };
 };
