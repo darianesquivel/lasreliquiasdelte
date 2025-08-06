@@ -19,13 +19,12 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 
-// export async function addProducts(db: any) {
+// export async function addProducts() {
 //   try {
 //     const productsCol = collection(db, "products");
 
-//     for (const product of PRODUCTS_A) {
-//       const { id, ...productData } = product;
-//       await addDoc(productsCol, productData);
+//     for (const product of products) {
+//       await addDoc(productsCol, product);
 //     }
 
 //     console.log("✅ Todos los productos fueron agregados correctamente");
