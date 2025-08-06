@@ -4,6 +4,7 @@ export interface Product {
   name: string;
   description: string;
   price: number;
+  price_discount: number | null;
   availability: boolean;
   imageUrl: string;
-} 
+}

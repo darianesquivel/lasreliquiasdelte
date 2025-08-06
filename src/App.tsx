@@ -1,7 +1,7 @@
-import Home from "./Home";
+import Menu from "./Menu";
 
 function App() {
-  return <Home />;
+  return <Menu />;
 }
 
 export default App;
