@@ -14,6 +14,7 @@ import {
   faTrashAlt,
   faMinus,
   faPlus,
+  faXmark,
 } from "@fortawesome/free-solid-svg-icons";
 import { faWhatsapp } from "@fortawesome/free-brands-svg-icons";
 import { useCartStore } from "../../store/cart-store";
@@ -120,8 +121,8 @@ export const Cart = () => {
               </Flex>
             )}
             <Dialog.Close>
-              <IconButton variant="ghost" radius="full" color="red">
-                x
+              <IconButton size={"1"} radius="full" color="red">
+                <FontAwesomeIcon size="xs" icon={faXmark} />
               </IconButton>
             </Dialog.Close>
           </Flex>

@@ -20,7 +20,7 @@ type ProductDetailProps = {
 };
 
 export const ProductDetail = ({ product }: ProductDetailProps) => {
-  const { name, description, price, imageUrl } = product;
+  const { name, description, price, imageUrl, price_discount } = product;
 
   const cartItems = useCartStore((state) => state.items);
   const addItem = useCartStore((state) => state.addItem);
@@ -48,8 +48,10 @@ export const ProductDetail = ({ product }: ProductDetailProps) => {
         <img src={imageUrl !== "" ? imageUrl : noimage} alt={name} />
       </Inset>
 
-      {/* NAME & DESCRIPTION */}
-      <Text>{name}</Text>
+      {/* NAME & DESCRIPTION & PRICE */}
+      <Text weight={"bold"} size={"4"}>
+        {name}
+      </Text>
       <Text
         className="line-clamp-1 overflow-hidden text-ellipsis break-words max-w-full"
         weight="light"
@@ -57,7 +59,16 @@ export const ProductDetail = ({ product }: ProductDetailProps) => {
       >
         {description}
       </Text>
-      <Text>${price}</Text>
+      <Flex gap={"2"} align={"center"}>
+        <Text size="2" weight="bold">
+          ${price_discount ?? price}
+        </Text>
+        {price_discount ? (
+          <Text className="text-through" size="1" weight="medium">
+            ${price}
+          </Text>
+        ) : null}
+      </Flex>
 
       {/* UNITS */}
       <Box width="100%">
@@ -86,17 +97,21 @@ export const ProductDetail = ({ product }: ProductDetailProps) => {
       <Flex direction="column" width="100%">
         <Button
           onClick={handleSubmit}
-          color={existingProduct ? "orange" : "green"}
+          color={existingProduct ? "yellow" : "green"}
           radius="full"
           size="3"
         >
-          <Badge variant="outline" highContrast>
-            {count}
-          </Badge>
-          <Text>
-            {existingProduct ? "Modificar pedido" : "Agregar a mi pedido"}
-          </Text>
-          <Text>${price * count}</Text>
+          <Flex justify={"between"} width={"100%"}>
+            <Badge variant="outline" highContrast>
+              {count}
+            </Badge>
+            <Text>
+              {existingProduct ? "Modificar pedido" : "Agregar a mi pedido"}
+            </Text>
+            <Text>
+              ${price_discount ? price_discount * count : price * count}
+            </Text>
+          </Flex>
         </Button>
       </Flex>
     </Flex>

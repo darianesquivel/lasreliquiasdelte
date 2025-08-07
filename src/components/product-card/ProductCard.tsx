@@ -10,6 +10,8 @@ import {
 import { type Product } from "../../types/product";
 import "./product-card.css";
 import { ProductDetail } from "../product-detail/ProductDetail";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 type ProductCardProps = {
   product: Product;
@@ -22,7 +24,13 @@ export const ProductCard = ({ product }: ProductCardProps) => {
     <Dialog.Root>
       <Dialog.Trigger>
         <Card style={{ boxShadow: "var(--shadow-3)" }}>
-          <Flex width="320px" height="120px" justify={"between"} gap={"1"}>
+          <Flex
+            width="320px"
+            height="120px"
+            justify={"between"}
+            gap={"1"}
+            align={"center"}
+          >
             <Flex direction="column" gap={"2"}>
               {/* BADGES */}
               <Flex gap={"1"}>
@@ -68,8 +76,8 @@ export const ProductCard = ({ product }: ProductCardProps) => {
         <Flex direction={"column"} align={"center"} gap={"6"}>
           <ProductDetail product={product} />
           <Dialog.Close>
-            <IconButton radius="full" color="red">
-              x
+            <IconButton size={"1"} radius="full" color="red">
+              <FontAwesomeIcon size="xs" icon={faXmark} />
             </IconButton>
           </Dialog.Close>
         </Flex>
