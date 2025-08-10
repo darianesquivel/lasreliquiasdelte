@@ -1,6 +1,8 @@
+import { ProductTypes } from "./productTypes";
+
 export interface Product {
   id: string;
-  type: string;
+  type: ProductTypes;
   name: string;
   description: string;
   price: number;
@@ -8,3 +10,5 @@ export interface Product {
   availability: boolean;
   imageUrl: string;
 }
+
+export type NewProduct = Omit<Product, "id">;

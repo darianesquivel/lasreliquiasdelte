@@ -18,17 +18,3 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
-
-// export async function addProducts() {
-//   try {
-//     const productsCol = collection(db, "products");
-
-//     for (const product of products) {
-//       await addDoc(productsCol, product);
-//     }
-
-//     console.log("✅ Todos los productos fueron agregados correctamente");
-//   } catch (error) {
-//     console.error("❌ Error al agregar productos:", error);
-//   }
-// }

@@ -8,7 +8,7 @@ async function getProducts(): Promise<Product[]> {
   const productsSnapshot = await getDocs(productsCol);
 
   const productsList: Product[] = productsSnapshot.docs.map((doc) => ({
-    id: doc.id, // el id que genera Firestore
+    id: doc.id,
     ...doc.data(),
   })) as Product[];
 

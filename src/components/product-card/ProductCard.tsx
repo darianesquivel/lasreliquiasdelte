@@ -56,14 +56,12 @@ export const ProductCard = ({ product }: ProductCardProps) => {
 
               {/* PRICE */}
               <Flex gap={"2"} align={"center"}>
-                <Text size="2" weight="bold">
-                  ${price_discount ?? price}
+                <Text weight={"bold"}>
+                  $ {price_discount ? price_discount : price}
                 </Text>
-                {price_discount ? (
-                  <Text className="text-through" size="1" weight="medium">
-                    ${price}
-                  </Text>
-                ) : null}
+                {price_discount && (
+                  <Text className="line-through">$ {price}</Text>
+                )}
               </Flex>
             </Flex>
 
