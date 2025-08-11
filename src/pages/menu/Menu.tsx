@@ -7,8 +7,6 @@ import { Cart } from "../../components/cart/Cart";
 const Menu = () => {
   const { isError, isLoading, data } = useGetProduct();
 
-  console.log("DATA => ", data);
-
   return (
     <Flex direction={"column"} align={"center"}>
       <Flex

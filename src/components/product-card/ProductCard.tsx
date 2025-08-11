@@ -8,17 +8,36 @@ import {
   IconButton,
 } from "@radix-ui/themes";
 import { type Product } from "../../types/product";
-import "./product-card.css";
 import { ProductDetail } from "../product-detail/ProductDetail";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Timestamp } from "@firebase/firestore";
 
 type ProductCardProps = {
   product: Product;
 };
 
 export const ProductCard = ({ product }: ProductCardProps) => {
-  const { name, description, price, price_discount, imageUrl } = product;
+  const { name, description, price, price_discount, imageUrl, createdAt } =
+    product;
+
+  const percentDiscount = price_discount
+    ? Math.round(((price - price_discount) / price) * 100)
+    : null;
+
+  function isNew(createdAt?: Timestamp): boolean {
+    if (!createdAt) return false; // si no existe, no es nuevo
+
+    const createdDate = createdAt.toDate(); // convertir de Timestamp a Date
+    const now = new Date();
+
+    const diffInMs = now.getTime() - createdDate.getTime();
+    const diffInDays = diffInMs / (1000 * 60 * 60 * 24);
+
+    return diffInDays <= 10;
+  }
+
+  const isNewProduct = isNew(createdAt);
 
   return (
     <Dialog.Root>
@@ -32,17 +51,22 @@ export const ProductCard = ({ product }: ProductCardProps) => {
             align={"center"}
           >
             <Flex direction="column" gap={"2"}>
-              {/* BADGES */}
+              {/* TAGS */}
               <Flex gap={"1"}>
-                {/* TODO */}
-                <Badge color="green">15% Off</Badge>
-                <Badge> NEW </Badge>
-                {/* TODO */}
+                {percentDiscount && (
+                  <Badge color="green">{percentDiscount}% Off </Badge>
+                )}
+
+                {isNewProduct && <Badge color="blue"> New </Badge>}
               </Flex>
 
               {/* NAME & DESCRIPTION */}
               <Flex direction={"column"}>
-                <Text size="3" weight={"bold"}>
+                <Text
+                  className="line-clamp-1 overflow-hidden text-ellipsis"
+                  size="3"
+                  weight={"bold"}
+                >
                   {name}
                 </Text>
                 <Text

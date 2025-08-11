@@ -30,6 +30,8 @@ export const Cart = () => {
 
   const handleSendOrder = () => {
     const items = useCartStore.getState().items;
+
+    // TODO - FIX TOTAL PRICE WHEN WE HAVE OFF ITEMS
     const totalPrice = items.reduce(
       (acc, item) => acc + item.quantity * item.price,
       0
@@ -66,14 +68,15 @@ export const Cart = () => {
           </Flex>
         </Dialog.Trigger>
         <Dialog.Content>
+          <Dialog.Title>TU CARRITO</Dialog.Title>
+          <Dialog.Description></Dialog.Description>
           <Flex direction={"column"} align={"center"} gap={"3"}>
             <FontAwesomeIcon icon={faCartShopping} />
-            <Text weight={"bold"}>Tu Carrito</Text>
             <Flex direction={"column"} gap={"2"}>
               {items.length > 0 &&
                 items.map((item) => {
                   return (
-                    <Flex gap={"4"} align={"center"}>
+                    <Flex key={item.id} gap={"4"} align={"center"}>
                       <Avatar fallback src={item.imageUrl} />
                       <Text size={"1"}>{item.name}</Text>
                       <Text size={"1"}>x{item.quantity}</Text>
