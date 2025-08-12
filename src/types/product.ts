@@ -26,4 +26,4 @@ export interface Product {
   isLactoseFree: Boolean;
 }
 
-export type NewProduct = Omit<Product, "id">;
+export type NewProduct = Omit<Product, "id" | "createdAt">;

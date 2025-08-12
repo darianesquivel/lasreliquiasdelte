@@ -3,13 +3,18 @@ import { ProductForm } from "../product-form/ProductForm";
 import { useCreateProduct } from "../../hooks/useCreateProduct";
 import { NewProduct } from "../../types/product";
 
-const NEW_PRODUCT = {
+const NEW_PRODUCT: NewProduct = {
   name: "",
   description: "",
   price: 0,
   price_discount: null,
   availability: true,
-  type: "cafeteria",
+  category: "cafeteria",
+  imageUrl: "",
+  isVegan: false,
+  isVegetarian: false,
+  isGlutenFree: false,
+  isLactoseFree: false,
 };
 
 export const ProductAdd = () => {

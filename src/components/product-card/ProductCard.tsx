@@ -9,17 +9,28 @@ import {
 } from "@radix-ui/themes";
 import { type Product } from "../../types/product";
 import { ProductDetail } from "../product-detail/ProductDetail";
-import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faCarrot, faLeaf, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Timestamp } from "@firebase/firestore";
+import noimage from "../../assets/logo.svg";
 
 type ProductCardProps = {
   product: Product;
 };
 
 export const ProductCard = ({ product }: ProductCardProps) => {
-  const { name, description, price, price_discount, imageUrl, createdAt } =
-    product;
+  const {
+    name,
+    description,
+    price,
+    price_discount,
+    imageUrl,
+    createdAt,
+    isGlutenFree,
+    isLactoseFree,
+    isVegan,
+    isVegetarian,
+  } = product;
 
   const percentDiscount = price_discount
     ? Math.round(((price - price_discount) / price) * 100)
@@ -42,55 +53,80 @@ export const ProductCard = ({ product }: ProductCardProps) => {
   return (
     <Dialog.Root>
       <Dialog.Trigger>
-        <Card style={{ boxShadow: "var(--shadow-3)" }}>
-          <Flex
-            width="320px"
-            height="120px"
-            justify={"between"}
-            gap={"1"}
-            align={"center"}
-          >
-            <Flex direction="column" gap={"2"}>
-              {/* TAGS */}
-              <Flex gap={"1"}>
-                {percentDiscount && (
-                  <Badge color="green">{percentDiscount}% Off </Badge>
-                )}
+        <Card>
+          <Flex gap="4" width="350px" height="95px" align="center">
+            {/* IMAGE */}
+            <Flex width="25%">
+              <Avatar size="6" fallback={"LRDT"} src={imageUrl || noimage} />
+            </Flex>
 
-                {isNewProduct && <Badge color="blue"> New </Badge>}
-              </Flex>
+            {/* NAME - DESCRIPTION - PRICE - PRICE DISCOUNT */}
+            <Flex direction="column" gap="2" width="60%">
+              <Text
+                className="line-clamp-1 text-ellipsis"
+                size="3"
+                weight="bold"
+              >
+                {name}
+              </Text>
+              <Text className="line-clamp-3  text-ellipsis" size="1">
+                {description}
+              </Text>
 
-              {/* NAME & DESCRIPTION */}
-              <Flex direction={"column"}>
-                <Text
-                  className="line-clamp-1 overflow-hidden text-ellipsis"
-                  size="3"
-                  weight={"bold"}
-                >
-                  {name}
-                </Text>
-                <Text
-                  className="line-clamp-2 overflow-hidden text-ellipsis"
-                  weight="light"
-                  size="2"
-                >
-                  {description}
-                </Text>
-              </Flex>
-
-              {/* PRICE */}
-              <Flex gap={"2"} align={"center"}>
-                <Text weight={"bold"}>
-                  $ {price_discount ? price_discount : price}
-                </Text>
+              <Flex gap="2">
                 {price_discount && (
-                  <Text className="line-through">$ {price}</Text>
+                  <Text color="green" weight="bold" size="1">
+                    ${price_discount}
+                  </Text>
                 )}
+
+                <Text
+                  className={price_discount ? "line-through text-gray-400" : ""}
+                  weight={price_discount ? "light" : "bold"}
+                  size="1"
+                >
+                  ${price}
+                </Text>
               </Flex>
             </Flex>
 
-            {/* IMAGE */}
-            <Avatar size="7" src={imageUrl} fallback="" />
+            {/* TAGS */}
+            <Flex gap="2" direction="column" align="end" width="20%">
+              {isNewProduct && (
+                <Badge className="max-w-min" color="mint" radius="full">
+                  New
+                </Badge>
+              )}
+
+              {percentDiscount && (
+                <Badge color="orange" radius="full">
+                  {percentDiscount}% OFF
+                </Badge>
+              )}
+
+              <Flex direction="column" gap="1">
+                <Flex justify="end" gap="1">
+                  {isVegetarian && (
+                    <FontAwesomeIcon color="orange" icon={faCarrot} />
+                  )}
+
+                  {isVegan && <FontAwesomeIcon color="green" icon={faLeaf} />}
+                </Flex>
+                <Flex justify="end" gap="2">
+                  {isGlutenFree && (
+                    <Text color="lime" size="2" weight="bold">
+                      GF
+                    </Text>
+                  )}
+
+                  {isLactoseFree && (
+                    <Text color="sky" size="2" weight="bold">
+                      LF
+                    </Text>
+                  )}
+                </Flex>
+              </Flex>
+            </Flex>
           </Flex>
         </Card>
       </Dialog.Trigger>

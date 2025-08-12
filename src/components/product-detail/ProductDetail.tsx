@@ -13,7 +13,7 @@ import { useState } from "react";
 import { useCartStore } from "../../store/cart-store";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
-import noimage from "../../assets/noimage.jpg";
+import noimage from "../../assets/logo.svg";
 
 type ProductDetailProps = {
   product: Product;
@@ -45,7 +45,7 @@ export const ProductDetail = ({ product }: ProductDetailProps) => {
     <Flex direction="column" justify="center" align="center" gap="2">
       {/* IMAGE */}
       <Inset side="x">
-        <img src={imageUrl !== "" ? imageUrl : noimage} alt={name} />
+        <img src={imageUrl || noimage} alt={name} />
       </Inset>
 
       {/* NAME & DESCRIPTION & PRICE */}

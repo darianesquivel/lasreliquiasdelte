@@ -9,10 +9,11 @@ import {
   Checkbox,
 } from "@radix-ui/themes";
 import { useState } from "react";
+import { NewProduct } from "../../types/product";
 
 type ProductFormProps = {
   onSave: (product: any) => void;
-  product: any;
+  product: NewProduct;
 };
 
 export const PRODUCT_CATEGORY = [
@@ -26,14 +27,54 @@ export const PRODUCT_CATEGORY = [
   { value: "otro", label: "Otro" },
 ];
 
+type DietKey = keyof NewProduct;
+
+const DIET_TYPES: { key: DietKey; label: string }[] = [
+  { key: "isVegan", label: "Vegano" },
+  { key: "isVegetarian", label: "Vegetariano" },
+  { key: "isGlutenFree", label: "Sin Gluten" },
+  { key: "isLactoseFree", label: "Sin Lactosa" },
+];
+
 export const ProductForm = ({ onSave, product }: ProductFormProps) => {
   const [productData, setProductData] = useState(product);
+  const [errors, setErrors] = useState<Record<string, string>>({});
 
-  const handleInputChange = (field: any, value: any) => {
+  const handleInputChange = (field: string, value: any) => {
     setProductData((prev: any) => ({
       ...prev,
       [field]: value,
     }));
+
+    if (errors[field]) {
+      setErrors((prev) => {
+        const copy = { ...prev };
+        delete copy[field];
+        return copy;
+      });
+    }
+  };
+
+  const validate = () => {
+    const newErrors: Record<string, string> = {};
+    if (!productData.name || productData.name.trim() === "") {
+      newErrors.name = "El nombre es obligatorio";
+    }
+    if (
+      productData.price === undefined ||
+      productData.price === null ||
+      productData.price === 0 ||
+      Number(productData.price) <= 0
+    ) {
+      newErrors.price = "El precio debe ser mayor a 0";
+    }
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleSave = () => {
+    if (!validate()) return;
+    onSave(productData);
   };
 
   return (
@@ -43,11 +84,17 @@ export const ProductForm = ({ onSave, product }: ProductFormProps) => {
         <TextField.Root
           value={productData.name}
           onChange={(e) => handleInputChange("name", e.target.value)}
+          aria-invalid={!!errors.name}
         />
+        {errors.name && (
+          <Text size="1" style={{ color: "red" }}>
+            {errors.name}
+          </Text>
+        )}
       </Text>
 
       <Text size="1" as="label">
-        Descripcion
+        Descripción
         <TextArea
           value={productData.description}
           onChange={(e) => handleInputChange("description", e.target.value)}
@@ -61,18 +108,27 @@ export const ProductForm = ({ onSave, product }: ProductFormProps) => {
             type="number"
             value={productData.price}
             onChange={(e) => handleInputChange("price", e.target.value)}
+            aria-invalid={!!errors.price}
           >
             <TextField.Slot>$</TextField.Slot>
           </TextField.Root>
+          {errors.price && (
+            <Text size="1" style={{ color: "red" }}>
+              {errors.price}
+            </Text>
+          )}
         </Text>
 
         <Text size="1" as="label">
           Precio oferta
           <TextField.Root
             type="number"
-            value={productData.price_discount}
+            value={productData.price_discount ?? ""}
             onChange={(e) =>
-              handleInputChange("price_discount", e.target.value)
+              handleInputChange(
+                "price_discount",
+                e.target.value === "" ? null : e.target.value
+              )
             }
           >
             <TextField.Slot>$</TextField.Slot>
@@ -81,17 +137,20 @@ export const ProductForm = ({ onSave, product }: ProductFormProps) => {
       </Flex>
 
       <Text size="1" as="label">
-        Categoria
+        Categoría
         <Flex direction="column">
           <Select.Root
             size="1"
+            defaultValue="cafeteria"
             value={productData.category}
             onValueChange={(value) => handleInputChange("category", value)}
           >
             <Select.Trigger />
             <Select.Content>
-              {PRODUCT_CATEGORY.map((type) => (
-                <Select.Item value={type.value}>{type.label}</Select.Item>
+              {PRODUCT_CATEGORY.map((category) => (
+                <Select.Item key={category.value} value={category.value}>
+                  {category.label}
+                </Select.Item>
               ))}
             </Select.Content>
           </Select.Root>
@@ -101,50 +160,23 @@ export const ProductForm = ({ onSave, product }: ProductFormProps) => {
       <Text size="1" as="label">
         Tipo de dieta
         <Flex direction="column" gap="1">
-          <Text size="1" as="label">
-            <Flex gap="2">
-              <Checkbox
-                checked={productData.isVegan}
-                onCheckedChange={(checked) =>
-                  handleInputChange("isVegan", checked)
-                }
-              />
-              Vegano
-            </Flex>
-          </Text>
-          <Text size="1" as="label">
-            <Flex gap="2">
-              <Checkbox
-                checked={productData.isVegetarian}
-                onCheckedChange={(checked) =>
-                  handleInputChange("isVegetarian", checked)
-                }
-              />
-              Vegetariano
-            </Flex>
-          </Text>
-          <Text size="1" as="label">
-            <Flex gap="2">
-              <Checkbox
-                checked={productData.isGlutenFree}
-                onCheckedChange={(checked) =>
-                  handleInputChange("isGlutenFree", checked)
-                }
-              />
-              Sin Gluten
-            </Flex>
-          </Text>
-          <Text size="1" as="label">
-            <Flex gap="2">
-              <Checkbox
-                checked={productData.isLactoseFree}
-                onCheckedChange={(checked) =>
-                  handleInputChange("isLactoseFree", checked)
-                }
-              />
-              Sin Lactosa
-            </Flex>
-          </Text>
+          {DIET_TYPES.map(({ key, label }) => (
+            <Text size="1" as="label" key={key}>
+              <Flex gap="2" align="center">
+                <Checkbox
+                  checked={
+                    productData[key] === null
+                      ? undefined
+                      : Boolean(productData[key])
+                  }
+                  onCheckedChange={(checked) =>
+                    handleInputChange(key, checked === true)
+                  }
+                />
+                {label}
+              </Flex>
+            </Text>
+          ))}
         </Flex>
       </Text>
 
@@ -155,7 +187,7 @@ export const ProductForm = ({ onSave, product }: ProductFormProps) => {
         />{" "}
         Disponible
       </Text>
-      <Button onClick={() => onSave(productData)}>GUARDAR</Button>
+      <Button onClick={handleSave}>GUARDAR</Button>
     </Flex>
   );
 };
