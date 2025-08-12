@@ -55,20 +55,24 @@ export const ProductCard = ({ product }: ProductCardProps) => {
         <Card>
           <Flex gap="4" width="350px" height="95px" align="center">
             {/* IMAGE */}
-            <Flex width="25%">
+            <Flex width="30%">
               <Avatar size="7" fallback src={imageUrl} />
             </Flex>
 
             {/* NAME - DESCRIPTION - PRICE - PRICE DISCOUNT */}
-            <Flex direction="column" gap="2" width="60%">
+            <Flex direction="column" gap="2" width="50%">
               <Text
                 className="line-clamp-1 text-ellipsis"
-                size="3"
+                size="2"
                 weight="bold"
               >
                 {name}
               </Text>
-              <Text className="line-clamp-3  text-ellipsis" size="1">
+              <Text
+                className="line-clamp-3  text-ellipsis"
+                size="1"
+                weight="light"
+              >
                 {description}
               </Text>
 
