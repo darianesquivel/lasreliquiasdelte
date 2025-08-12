@@ -1,8 +1,9 @@
 import { Flex, Heading, Text } from "@radix-ui/themes";
-import logo from "../../assets/logo.svg";
 import { ProductCard } from "../../components/product-card/ProductCard";
 import { useGetProduct } from "../../hooks/useGetProducts";
 import { Cart } from "../../components/cart/Cart";
+import { ThemeButton } from "../../components/theme/ThemeButton";
+import { Logo } from "../../assets/logo";
 
 const Menu = () => {
   const { isError, isLoading, data } = useGetProduct();
@@ -16,10 +17,10 @@ const Menu = () => {
         justify={"center"}
         gap={"2"}
       >
+        <ThemeButton />
         <Cart />
-        <img src={logo} alt="logo" className="w-[200px]" />
+        <Logo />
         <Heading size="5">MENÚ</Heading>
-        <Heading size="3">ACCIO CAFÉ</Heading>
         {data && data.length < 1 && <Text>No tiene productos</Text>}
         {isLoading && <Text>Loading ...</Text>}
         {isError && <Text>Error</Text>}

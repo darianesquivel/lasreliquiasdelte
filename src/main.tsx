@@ -7,16 +7,26 @@ import { BrowserRouter } from "react-router-dom";
 import "./index.css";
 import "@radix-ui/themes/styles.css";
 
+import { useThemeStore } from "./store/theme-store";
+
 const queryClient = new QueryClient();
 
-createRoot(document.getElementById("root")!).render(
-  <StrictMode>
-    <Theme>
+function Root() {
+  const theme = useThemeStore((state) => state.theme);
+
+  return (
+    <Theme appearance={theme}>
       <QueryClientProvider client={queryClient}>
         <BrowserRouter>
           <App />
         </BrowserRouter>
       </QueryClientProvider>
     </Theme>
+  );
+}
+
+createRoot(document.getElementById("root")!).render(
+  <StrictMode>
+    <Root />
   </StrictMode>
 );

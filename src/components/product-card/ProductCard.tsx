@@ -12,7 +12,6 @@ import { ProductDetail } from "../product-detail/ProductDetail";
 import { faCarrot, faLeaf, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Timestamp } from "@firebase/firestore";
-import noimage from "../../assets/logo.svg";
 
 type ProductCardProps = {
   product: Product;
@@ -57,7 +56,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
           <Flex gap="4" width="350px" height="95px" align="center">
             {/* IMAGE */}
             <Flex width="25%">
-              <Avatar size="6" fallback={"LRDT"} src={imageUrl || noimage} />
+              <Avatar size="7" fallback src={imageUrl} />
             </Flex>
 
             {/* NAME - DESCRIPTION - PRICE - PRICE DISCOUNT */}
