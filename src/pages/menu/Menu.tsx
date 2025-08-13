@@ -1,9 +1,9 @@
 import { Flex, Heading, Text } from "@radix-ui/themes";
-import { ProductCard } from "../../components/product-card/ProductCard";
+import { ProductCard } from "../../components/products/ProductCard";
 import { useGetProduct } from "../../hooks/useGetProducts";
 import { Cart } from "../../components/cart/Cart";
 import { ThemeButton } from "../../components/theme/ThemeButton";
-import { Logo } from "../../assets/logo";
+import { Logo } from "../../components/logo/logo";
 
 const Menu = () => {
   const { isError, isLoading, data } = useGetProduct();

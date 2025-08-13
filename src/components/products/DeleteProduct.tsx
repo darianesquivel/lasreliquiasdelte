@@ -3,11 +3,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { AlertDialog, Button, IconButton } from "@radix-ui/themes";
 import { useDeleteProduct } from "../../hooks/useDeleteProduct";
 
-type ProducDeleteProps = {
+type DeleteProductProps = {
   id: string;
 };
 
-export const ProductDetelete = ({ id }: ProducDeleteProps) => {
+export const DeleteProduct = ({ id }: DeleteProductProps) => {
   const { mutate: deleteProduct, isPending } = useDeleteProduct();
 
   const handleDelete = () => {

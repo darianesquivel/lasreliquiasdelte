@@ -1,10 +1,10 @@
 import { Avatar, Card, Flex, Text, TextField } from "@radix-ui/themes";
 import { useGetProduct } from "../../hooks/useGetProducts";
-import { ProductEdit } from "../../components/product-edit/ProductEdit";
-import { ProductDetelete } from "../../components/product-delete/ProductDelete";
+import { EditProduct } from "../../components/products/EditProduct";
+import { DeleteProduct } from "../../components/products/DeleteProduct";
 import { useState } from "react";
 import { useDebounce } from "../../hooks/useDebonce";
-import { ProductAdd } from "../../components/product-add/ProductAdd";
+import { CreateProduct } from "../../components/products/CreateProduct";
 
 function MenuAdmin() {
   const { data } = useGetProduct();
@@ -27,7 +27,7 @@ function MenuAdmin() {
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
-        <ProductAdd />
+        <CreateProduct />
       </Flex>
 
       {filteredProducts?.map((product) => {
@@ -73,8 +73,8 @@ function MenuAdmin() {
                 </Flex>
               </Flex>
               <Flex gap="4">
-                <ProductEdit product={product} />
-                <ProductDetelete id={id} />
+                <EditProduct product={product} />
+                <DeleteProduct id={id} />
               </Flex>
             </Flex>
           </Card>

@@ -13,7 +13,7 @@ import { useState } from "react";
 import { useCartStore } from "../../store/cart-store";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
-import noimage from "../../assets/logo.svg";
+import Logo from "../../assets/blackLogo.svg";
 
 type ProductDetailProps = {
   product: Product;
@@ -42,21 +42,31 @@ export const ProductDetail = ({ product }: ProductDetailProps) => {
   };
 
   return (
-    <Flex direction="column" justify="center" align="center" gap="2">
+    <Flex
+      direction="column"
+      justify="center"
+      align="center"
+      gap="2"
+      style={{ maxWidth: "100vw", overflowX: "hidden" }}
+    >
       {/* IMAGE */}
       <Inset side="x">
-        <img src={imageUrl || noimage} alt={name} />
+        <img
+          style={{
+            maxWidth: "100%",
+            height: "auto",
+            display: "block",
+          }}
+          src={imageUrl || Logo}
+          alt={name}
+        />
       </Inset>
 
       {/* NAME & DESCRIPTION & PRICE */}
       <Text weight={"bold"} size={"4"}>
         {name}
       </Text>
-      <Text
-        className="line-clamp-1 overflow-hidden text-ellipsis break-words max-w-full"
-        weight="light"
-        size="2"
-      >
+      <Text className="line-clamp-1 text-ellipsis" weight="light" size="2">
         {description}
       </Text>
 

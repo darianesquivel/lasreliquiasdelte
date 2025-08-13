@@ -13,7 +13,21 @@ import { NewProduct } from "../../types/product";
 
 type ProductFormProps = {
   onSave: (product: any) => void;
-  product: NewProduct;
+  product?: NewProduct;
+};
+
+const NEW_PRODUCT: NewProduct = {
+  name: "",
+  description: "",
+  price: 0,
+  price_discount: null,
+  availability: true,
+  category: "cafeteria",
+  imageUrl: "",
+  isVegan: false,
+  isVegetarian: false,
+  isGlutenFree: false,
+  isLactoseFree: false,
 };
 
 export const PRODUCT_CATEGORY = [
@@ -37,7 +51,7 @@ const DIET_TYPES: { key: DietKey; label: string }[] = [
 ];
 
 export const ProductForm = ({ onSave, product }: ProductFormProps) => {
-  const [productData, setProductData] = useState(product);
+  const [productData, setProductData] = useState(product || NEW_PRODUCT);
   const [errors, setErrors] = useState<Record<string, string>>({});
 
   const handleInputChange = (field: string, value: any) => {

@@ -8,7 +8,7 @@ import {
   IconButton,
 } from "@radix-ui/themes";
 import { type Product } from "../../types/product";
-import { ProductDetail } from "../product-detail/ProductDetail";
+import { ProductDetail } from "./ProductDetail";
 import { faCarrot, faLeaf, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Timestamp } from "@firebase/firestore";
@@ -36,9 +36,9 @@ export const ProductCard = ({ product }: ProductCardProps) => {
     : null;
 
   function isNew(createdAt?: Timestamp): boolean {
-    if (!createdAt) return false; // si no existe, no es nuevo
+    if (!createdAt) return false;
 
-    const createdDate = createdAt.toDate(); // convertir de Timestamp a Date
+    const createdDate = createdAt.toDate();
     const now = new Date();
 
     const diffInMs = now.getTime() - createdDate.getTime();

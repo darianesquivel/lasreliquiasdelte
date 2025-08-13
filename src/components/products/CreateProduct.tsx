@@ -1,23 +1,9 @@
 import { Button, Dialog } from "@radix-ui/themes";
-import { ProductForm } from "../product-form/ProductForm";
+import { ProductForm } from "./ProductForm";
 import { useCreateProduct } from "../../hooks/useCreateProduct";
 import { NewProduct } from "../../types/product";
 
-const NEW_PRODUCT: NewProduct = {
-  name: "",
-  description: "",
-  price: 0,
-  price_discount: null,
-  availability: true,
-  category: "cafeteria",
-  imageUrl: "",
-  isVegan: false,
-  isVegetarian: false,
-  isGlutenFree: false,
-  isLactoseFree: false,
-};
-
-export const ProductAdd = () => {
+export const CreateProduct = () => {
   const { mutate: createProduct } = useCreateProduct();
 
   const handleSave = (newProduct: NewProduct) => {
@@ -38,7 +24,7 @@ export const ProductAdd = () => {
         <Dialog.Description>
           COMPLETA LOS DATOS DEL NUEVO PRODUCTO
         </Dialog.Description>
-        <ProductForm product={NEW_PRODUCT} onSave={handleSave} />
+        <ProductForm onSave={handleSave} />
       </Dialog.Content>
     </Dialog.Root>
   );

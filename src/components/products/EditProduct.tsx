@@ -1,14 +1,15 @@
 import { Dialog, IconButton } from "@radix-ui/themes";
-import { ProductForm } from "../product-form/ProductForm";
+import { ProductForm } from "./ProductForm";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import { useUpdateProduct } from "../../hooks/useUpdateProduct";
+import { NewProduct } from "../../types/product";
 
-type ProductEditProps = {
-  product: any;
+type EditProductProps = {
+  product: NewProduct;
 };
 
-export const ProductEdit = ({ product }: ProductEditProps) => {
+export const EditProduct = ({ product }: EditProductProps) => {
   const { mutate: updateProduct } = useUpdateProduct();
 
   const handleSave = (product: any) => {
