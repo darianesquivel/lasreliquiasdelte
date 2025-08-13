@@ -47,14 +47,16 @@ export const ProductDetail = ({ product }: ProductDetailProps) => {
       justify="center"
       align="center"
       gap="2"
-      style={{ maxWidth: "100vw", overflowX: "hidden" }}
+      width={"100%"}
     >
       {/* IMAGE */}
-      <Inset side="x">
+      <Inset side="top">
         <img
           style={{
-            maxWidth: "100%",
-            height: "auto",
+            width: "100%",
+            maxHeight: "100%",
+            objectFit: "cover",
+            objectPosition: "center",
             display: "block",
           }}
           src={imageUrl || Logo}
@@ -66,14 +68,24 @@ export const ProductDetail = ({ product }: ProductDetailProps) => {
       <Text weight={"bold"} size={"4"}>
         {name}
       </Text>
-      <Text className="line-clamp-1 text-ellipsis" weight="light" size="2">
+      <Text weight="light" size="2">
         {description}
       </Text>
 
       {/* PRICE */}
-      <Flex gap={"2"} align={"center"}>
-        <Text weight={"bold"}>$ {price_discount ? price_discount : price}</Text>
-        {price_discount && <Text className="line-through">$ {price}</Text>}
+      <Flex gap="2">
+        {price_discount && (
+          <Text color="green" weight="bold">
+            ${price_discount}
+          </Text>
+        )}
+
+        <Text
+          className={price_discount ? "line-through text-gray-400" : ""}
+          weight={price_discount ? "light" : "bold"}
+        >
+          ${price}
+        </Text>
       </Flex>
 
       {/* UNITS */}

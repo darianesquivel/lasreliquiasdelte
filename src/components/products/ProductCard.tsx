@@ -6,8 +6,9 @@ import {
   Badge,
   Dialog,
   IconButton,
+  BadgeProps,
 } from "@radix-ui/themes";
-import { type Product } from "../../types/product";
+import { ProductCategory, type Product } from "../../types/product";
 import { ProductDetail } from "./ProductDetail";
 import { faCarrot, faLeaf, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -24,6 +25,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
     price,
     price_discount,
     imageUrl,
+    category,
     createdAt,
     isGlutenFree,
     isLactoseFree,
@@ -49,6 +51,30 @@ export const ProductCard = ({ product }: ProductCardProps) => {
 
   const isNewProduct = isNew(createdAt);
 
+  type BadgeColor = NonNullable<BadgeProps["color"]>;
+
+  const categoryColors: Record<ProductCategory, BadgeColor> = {
+    cafeteria: "amber",
+    te: "blue",
+    pudineria: "pink",
+    panaderia: "gold",
+    salado: "tomato",
+    adicionales: "violet",
+    jugos: "orange",
+    otro: "gray",
+  };
+
+  const categoryNames: Record<ProductCategory, string> = {
+    cafeteria: "Cafetería",
+    te: "Té",
+    pudineria: "Pudinería",
+    panaderia: "Panadería",
+    salado: "Salado",
+    adicionales: "Adicionales",
+    jugos: "Jugos",
+    otro: "Otro",
+  };
+
   return (
     <Dialog.Root>
       <Dialog.Trigger>
@@ -60,7 +86,14 @@ export const ProductCard = ({ product }: ProductCardProps) => {
             </Flex>
 
             {/* NAME - DESCRIPTION - PRICE - PRICE DISCOUNT */}
-            <Flex direction="column" gap="2" width="50%">
+            <Flex direction="column" gap="1" width="50%">
+              <Badge
+                className="max-w-min"
+                color={categoryColors[category]}
+                size="1"
+              >
+                {categoryNames[category]}
+              </Badge>
               <Text
                 className="line-clamp-1 text-ellipsis"
                 size="2"
@@ -69,7 +102,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
                 {name}
               </Text>
               <Text
-                className="line-clamp-3  text-ellipsis"
+                className="line-clamp-2  text-ellipsis"
                 size="1"
                 weight="light"
               >

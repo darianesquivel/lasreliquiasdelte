@@ -3,7 +3,7 @@ import { ProductCard } from "../../components/products/ProductCard";
 import { useGetProduct } from "../../hooks/useGetProducts";
 import { Cart } from "../../components/cart/Cart";
 import { ThemeButton } from "../../components/theme/ThemeButton";
-import { Logo } from "../../components/logo/logo";
+import { Logo } from "../../components/logo/Logo";
 
 const Menu = () => {
   const { isError, isLoading, data } = useGetProduct();
@@ -18,8 +18,8 @@ const Menu = () => {
         gap={"2"}
       >
         <ThemeButton />
-        <Cart />
         <Logo />
+        <Cart />
         <Heading size="5">MENÚ</Heading>
         {data && data.length < 1 && <Text>No tiene productos</Text>}
         {isLoading && <Text>Loading ...</Text>}

@@ -34,10 +34,10 @@ export const PRODUCT_CATEGORY = [
   { value: "cafeteria", label: "Cafetería" },
   { value: "te", label: "Té" },
   { value: "pudineria", label: "Pudinería" },
+  { value: "panaderia", label: "Panadería" },
   { value: "salado", label: "Salado" },
   { value: "adicionales", label: "Adicionales" },
-  { value: "jugos-batidos", label: "Jugos y Batidos" },
-  { value: "postres", label: "Postres" },
+  { value: "jugos", label: "Jugos y Batidos" },
   { value: "otro", label: "Otro" },
 ];
 
