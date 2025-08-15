@@ -10,6 +10,7 @@ import {
 } from "@radix-ui/themes";
 import { useState } from "react";
 import { NewProduct } from "../../types/product";
+import { useGetCategories } from "../../hooks/categories/useGetCategories";
 
 type ProductFormProps = {
   onSave: (product: any) => void;
@@ -18,28 +19,8 @@ type ProductFormProps = {
 
 const NEW_PRODUCT: NewProduct = {
   name: "",
-  description: "",
   price: 0,
-  price_discount: null,
-  availability: true,
-  category: "cafeteria",
-  imageUrl: "",
-  isVegan: false,
-  isVegetarian: false,
-  isGlutenFree: false,
-  isLactoseFree: false,
 };
-
-export const PRODUCT_CATEGORY = [
-  { value: "cafeteria", label: "Cafetería" },
-  { value: "te", label: "Té" },
-  { value: "pudineria", label: "Pudinería" },
-  { value: "panaderia", label: "Panadería" },
-  { value: "salado", label: "Salado" },
-  { value: "adicionales", label: "Adicionales" },
-  { value: "jugos", label: "Jugos y Batidos" },
-  { value: "otro", label: "Otro" },
-];
 
 type DietKey = keyof NewProduct;
 
@@ -53,6 +34,8 @@ const DIET_TYPES: { key: DietKey; label: string }[] = [
 export const ProductForm = ({ onSave, product }: ProductFormProps) => {
   const [productData, setProductData] = useState(product || NEW_PRODUCT);
   const [errors, setErrors] = useState<Record<string, string>>({});
+
+  const { data: categories } = useGetCategories();
 
   const handleInputChange = (field: string, value: any) => {
     setProductData((prev: any) => ({
@@ -150,26 +133,32 @@ export const ProductForm = ({ onSave, product }: ProductFormProps) => {
         </Text>
       </Flex>
 
-      <Text size="1" as="label">
-        Categoría
-        <Flex direction="column">
-          <Select.Root
-            size="1"
-            defaultValue="cafeteria"
-            value={productData.category}
-            onValueChange={(value) => handleInputChange("category", value)}
-          >
-            <Select.Trigger />
-            <Select.Content>
-              {PRODUCT_CATEGORY.map((category) => (
-                <Select.Item key={category.value} value={category.value}>
-                  {category.label}
-                </Select.Item>
-              ))}
-            </Select.Content>
-          </Select.Root>
-        </Flex>
-      </Text>
+      {categories && categories?.length > 0 && (
+        <Text size="1" as="label">
+          Categoría
+          <Flex direction="column">
+            <Select.Root
+              size="1"
+              value={productData.category?.name}
+              onValueChange={(value) => {
+                const selectedCategory = categories?.find(
+                  (category) => category.name === value
+                );
+                handleInputChange("category", selectedCategory);
+              }}
+            >
+              <Select.Trigger />
+              <Select.Content>
+                {categories?.map((category) => (
+                  <Select.Item key={category.id} value={category.name}>
+                    {category.name}
+                  </Select.Item>
+                ))}
+              </Select.Content>
+            </Select.Root>
+          </Flex>
+        </Text>
+      )}
 
       <Text size="1" as="label">
         Tipo de dieta

@@ -6,9 +6,8 @@ import {
   Badge,
   Dialog,
   IconButton,
-  BadgeProps,
 } from "@radix-ui/themes";
-import { ProductCategory, type Product } from "../../types/product";
+import { type Product } from "../../types/product";
 import { ProductDetail } from "./ProductDetail";
 import { faCarrot, faLeaf, faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -51,30 +50,6 @@ export const ProductCard = ({ product }: ProductCardProps) => {
 
   const isNewProduct = isNew(createdAt);
 
-  type BadgeColor = NonNullable<BadgeProps["color"]>;
-
-  const categoryColors: Record<ProductCategory, BadgeColor> = {
-    cafeteria: "amber",
-    te: "blue",
-    pudineria: "pink",
-    panaderia: "gold",
-    salado: "tomato",
-    adicionales: "violet",
-    jugos: "orange",
-    otro: "gray",
-  };
-
-  const categoryNames: Record<ProductCategory, string> = {
-    cafeteria: "Cafetería",
-    te: "Té",
-    pudineria: "Pudinería",
-    panaderia: "Panadería",
-    salado: "Salado",
-    adicionales: "Adicionales",
-    jugos: "Jugos",
-    otro: "Otro",
-  };
-
   return (
     <Dialog.Root>
       <Dialog.Trigger>
@@ -87,13 +62,12 @@ export const ProductCard = ({ product }: ProductCardProps) => {
 
             {/* NAME - DESCRIPTION - PRICE - PRICE DISCOUNT */}
             <Flex direction="column" gap="1" width="50%">
-              <Badge
-                className="max-w-min"
-                color={categoryColors[category]}
-                size="1"
-              >
-                {categoryNames[category]}
-              </Badge>
+              {category && (
+                <Badge className="max-w-min" color={category.color} size="1">
+                  {category.name}
+                </Badge>
+              )}
+
               <Text
                 className="line-clamp-1 text-ellipsis"
                 size="2"

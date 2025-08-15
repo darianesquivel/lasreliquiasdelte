@@ -1,29 +1,20 @@
 import { Timestamp } from "firebase/firestore/lite";
-
-export type ProductCategory =
-  | "cafeteria"
-  | "te"
-  | "pudineria"
-  | "panaderia"
-  | "salado"
-  | "adicionales"
-  | "jugos"
-  | "otro";
+import { Category } from "./categories";
 
 export interface Product {
   id: string;
-  category: ProductCategory;
+  category?: Category | null;
   name: string;
-  description: string;
+  description?: string;
   price: number;
-  price_discount: number | null;
-  availability: boolean;
-  imageUrl: string;
+  price_discount?: number;
+  availability?: boolean;
+  imageUrl?: string;
   createdAt: Timestamp;
-  isVegan: Boolean;
-  isVegetarian: Boolean;
-  isGlutenFree: Boolean;
-  isLactoseFree: Boolean;
+  isVegan?: Boolean;
+  isVegetarian?: Boolean;
+  isGlutenFree?: Boolean;
+  isLactoseFree?: Boolean;
 }
 
 export type NewProduct = Omit<Product, "id" | "createdAt">;

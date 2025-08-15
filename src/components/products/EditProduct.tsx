@@ -2,7 +2,7 @@ import { Dialog, IconButton } from "@radix-ui/themes";
 import { ProductForm } from "./ProductForm";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit } from "@fortawesome/free-solid-svg-icons";
-import { useUpdateProduct } from "../../hooks/useUpdateProduct";
+import { useUpdateProduct } from "../../hooks/products/useUpdateProduct";
 import { NewProduct } from "../../types/product";
 
 type EditProductProps = {

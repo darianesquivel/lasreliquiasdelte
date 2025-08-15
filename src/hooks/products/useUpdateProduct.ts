@@ -1,7 +1,7 @@
 import { doc, updateDoc } from "@firebase/firestore/lite";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { db } from "../firebase/firebase";
-import { type Product } from "../types/product";
+import { db } from "../../firebase/firebase";
+import { type Product } from "../../types/product";
 
 async function updateProduct(product: Product): Promise<void> {
   const { id, ...data } = product;

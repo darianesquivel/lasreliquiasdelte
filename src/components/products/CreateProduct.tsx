@@ -1,6 +1,6 @@
 import { Button, Dialog } from "@radix-ui/themes";
 import { ProductForm } from "./ProductForm";
-import { useCreateProduct } from "../../hooks/useCreateProduct";
+import { useCreateProduct } from "../../hooks/products/useCreateProduct";
 import { NewProduct } from "../../types/product";
 
 export const CreateProduct = () => {
@@ -17,7 +17,7 @@ export const CreateProduct = () => {
   return (
     <Dialog.Root>
       <Dialog.Trigger>
-        <Button>AGREGAR NUEVO PRODUCTO</Button>
+        <Button color="green">CREAR PRODUCTO</Button>
       </Dialog.Trigger>
       <Dialog.Content>
         <Dialog.Title>AGREGAR PRODUCTO</Dialog.Title>

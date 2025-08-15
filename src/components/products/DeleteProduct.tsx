@@ -1,7 +1,7 @@
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { AlertDialog, Button, IconButton } from "@radix-ui/themes";
-import { useDeleteProduct } from "../../hooks/useDeleteProduct";
+import { useDeleteProduct } from "../../hooks/products/useDeleteProduct";
 
 type DeleteProductProps = {
   id: string;
