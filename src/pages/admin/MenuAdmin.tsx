@@ -1,7 +1,6 @@
 import {
   Avatar,
   Badge,
-  Button,
   Card,
   Flex,
   Tabs,
