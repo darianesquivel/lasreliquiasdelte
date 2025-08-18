@@ -34,11 +34,7 @@ const Menu = () => {
 
         {products &&
           products.map((product) => {
-            return (
-              <Flex justify="center" wrap="wrap" gap="2">
-                <ProductCard key={product.id} product={product} />
-              </Flex>
-            );
+            return <ProductCard key={product.id} product={product} />;
           })}
       </Flex>
     </Flex>

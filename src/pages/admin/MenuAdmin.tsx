@@ -22,8 +22,6 @@ function MenuAdmin() {
   const { data: products } = useGetProducts();
   const { data: categories } = useGetCategories();
 
-  console.log("PRODUCTS ==>", products);
-
   const [searchTerm, setSearchTerm] = useState("");
 
   const debouncedSearch = useDebounce(searchTerm, 300);
@@ -118,7 +116,7 @@ function MenuAdmin() {
             <Flex direction="column">
               {categories?.map((category) => {
                 return (
-                  <Flex align="center">
+                  <Flex key={category.id} align="center">
                     <Badge color={category.color}>{category.name}</Badge>
                     <DeleteCategory id={category.id} />
                     <EditCategory category={category} />

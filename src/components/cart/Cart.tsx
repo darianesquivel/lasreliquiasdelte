@@ -31,16 +31,12 @@ export const Cart = () => {
   const handleSendOrder = () => {
     const items = useCartStore.getState().items;
 
-    // TODO - FIX TOTAL PRICE WHEN WE HAVE OFF ITEMS
-    const totalPrice = items.reduce(
-      (acc, item) => acc + item.quantity * item.price,
-      0
-    );
-
     const message = `Hola! Quiero hacer este pedido:\n\n${items
       .map(
         (item) =>
-          `${item.name} x${item.quantity} - $${item.price * item.quantity}`
+          `${item.name} x${item.quantity} - $${
+            (item.price_discount ?? item.price) * item.quantity
+          }`
       )
       .join("\n")}\n\nTotal: $${totalPrice}`;
 

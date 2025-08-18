@@ -6,6 +6,7 @@ import {
   Badge,
   Dialog,
   IconButton,
+  VisuallyHidden,
 } from "@radix-ui/themes";
 import { type Product } from "../../types/product";
 import { ProductDetail } from "./ProductDetail";
@@ -140,7 +141,11 @@ export const ProductCard = ({ product }: ProductCardProps) => {
           </Flex>
         </Card>
       </Dialog.Trigger>
-      <Dialog.Content>
+      <Dialog.Content aria-describedby={undefined}>
+        <Dialog.Title>
+          <VisuallyHidden asChild>Product detail</VisuallyHidden>
+        </Dialog.Title>
+
         <Flex direction={"column"} align={"center"} gap={"6"}>
           <ProductDetail product={product} />
           <Dialog.Close>

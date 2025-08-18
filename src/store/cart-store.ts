@@ -88,7 +88,11 @@ export const useCartStore = create<CartState>()(
         get().items.reduce((acc, item) => acc + item.quantity, 0),
 
       getTotalPrice: () =>
-        get().items.reduce((acc, item) => acc + item.quantity * item.price, 0),
+        get().items.reduce(
+          (acc, item) =>
+            acc + item.quantity * (item.price_discount ?? item.price),
+          0
+        ),
     }),
     {
       name: "cart-storage",
