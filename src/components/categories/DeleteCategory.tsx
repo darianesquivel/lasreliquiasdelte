@@ -1,9 +1,10 @@
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { AlertDialog, Button, IconButton } from "@radix-ui/themes";
+import { AlertDialog, Button, Flex, IconButton } from "@radix-ui/themes";
 import { useDeleteCategory } from "../../hooks/categories/useDeleteCategory";
 import { useGetProducts } from "../../hooks/products/useGetProducts";
 import { useUpdateProduct } from "../../hooks/products/useUpdateProduct";
+import { toast } from "react-toastify";
 
 type DeleteCategoryProps = {
   id: string;
@@ -27,7 +28,11 @@ export const DeleteCategory = ({ id }: DeleteCategoryProps) => {
       );
     }
 
-    await deleteCategory(id);
+    await deleteCategory(id, {
+      onSuccess: () => {
+        toast("Categoria eliminada");
+      },
+    });
   };
 
   return (
@@ -42,21 +47,23 @@ export const DeleteCategory = ({ id }: DeleteCategoryProps) => {
         <AlertDialog.Description>
           Estas seguro que queres eliminar esta categoria?
         </AlertDialog.Description>
-        <AlertDialog.Cancel>
-          <Button variant="soft" color="gray">
-            Cancel
-          </Button>
-        </AlertDialog.Cancel>
-        <AlertDialog.Action>
-          <Button
-            variant="solid"
-            color="red"
-            onClick={handleDelete}
-            disabled={isPending}
-          >
-            Eliminar Categoria
-          </Button>
-        </AlertDialog.Action>
+        <Flex gap="2">
+          <AlertDialog.Cancel>
+            <Button variant="soft" color="gray">
+              Cancel
+            </Button>
+          </AlertDialog.Cancel>
+          <AlertDialog.Action>
+            <Button
+              variant="solid"
+              color="red"
+              onClick={handleDelete}
+              disabled={isPending}
+            >
+              Eliminar Categoria
+            </Button>
+          </AlertDialog.Action>
+        </Flex>
       </AlertDialog.Content>
     </AlertDialog.Root>
   );

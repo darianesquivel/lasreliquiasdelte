@@ -1,7 +1,8 @@
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { AlertDialog, Button, IconButton } from "@radix-ui/themes";
+import { AlertDialog, Button, Flex, IconButton } from "@radix-ui/themes";
 import { useDeleteProduct } from "../../hooks/products/useDeleteProduct";
+import { toast } from "react-toastify";
 
 type DeleteProductProps = {
   id: string;
@@ -11,7 +12,11 @@ export const DeleteProduct = ({ id }: DeleteProductProps) => {
   const { mutate: deleteProduct, isPending } = useDeleteProduct();
 
   const handleDelete = () => {
-    deleteProduct(id);
+    deleteProduct(id, {
+      onSuccess: () => {
+        toast("Producto eliminado");
+      },
+    });
   };
 
   return (
@@ -26,21 +31,23 @@ export const DeleteProduct = ({ id }: DeleteProductProps) => {
         <AlertDialog.Description>
           Estas seguro que queres eliminar este producto?
         </AlertDialog.Description>
-        <AlertDialog.Cancel>
-          <Button variant="soft" color="gray">
-            Cancel
-          </Button>
-        </AlertDialog.Cancel>
-        <AlertDialog.Action>
-          <Button
-            variant="solid"
-            color="red"
-            onClick={handleDelete}
-            disabled={isPending}
-          >
-            Eliminar producto
-          </Button>
-        </AlertDialog.Action>
+        <Flex gap="2">
+          <AlertDialog.Cancel>
+            <Button variant="soft" color="gray">
+              Cancel
+            </Button>
+          </AlertDialog.Cancel>
+          <AlertDialog.Action>
+            <Button
+              variant="solid"
+              color="red"
+              onClick={handleDelete}
+              disabled={isPending}
+            >
+              Eliminar producto
+            </Button>
+          </AlertDialog.Action>
+        </Flex>
       </AlertDialog.Content>
     </AlertDialog.Root>
   );

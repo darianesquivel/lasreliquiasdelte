@@ -37,6 +37,7 @@ const COLORS: CategoryColor[] = [
 interface CategoryFormProps {
   onSave: (category: NewCategory) => void;
   category?: NewCategory;
+  isPending?: boolean;
 }
 
 const NEW_CATEGORY: NewCategory = {
@@ -44,7 +45,11 @@ const NEW_CATEGORY: NewCategory = {
   color: "gray",
 };
 
-export const CategoryForm = ({ onSave, category }: CategoryFormProps) => {
+export const CategoryForm = ({
+  onSave,
+  category,
+  isPending,
+}: CategoryFormProps) => {
   const [NewCategory, setNewCategory] = useState<NewCategory>(
     category || NEW_CATEGORY
   );
@@ -87,7 +92,9 @@ export const CategoryForm = ({ onSave, category }: CategoryFormProps) => {
         </Select.Root>
       </Text>
 
-      <Button onClick={handleSave}>GUARDAR</Button>
+      <Button loading={isPending} onClick={handleSave}>
+        GUARDAR
+      </Button>
     </Flex>
   );
 };

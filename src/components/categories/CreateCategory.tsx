@@ -6,7 +6,7 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 
 export const CreateCategory = () => {
-  const { mutate: createCategory } = useCreateCategory();
+  const { mutate: createCategory, isPending } = useCreateCategory();
   const [open, setOpen] = useState(false);
 
   const handleSave = (category: NewCategory) => {
@@ -26,7 +26,7 @@ export const CreateCategory = () => {
       <Dialog.Content>
         <Dialog.Title>CREAR CATEGORIA</Dialog.Title>
         <Dialog.Description>NOMBRE DE LA CATEGORIA</Dialog.Description>
-        <CategoryForm onSave={handleSave} />
+        <CategoryForm onSave={handleSave} isPending={isPending} />
       </Dialog.Content>
     </Dialog.Root>
   );
