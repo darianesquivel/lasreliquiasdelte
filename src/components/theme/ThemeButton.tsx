@@ -6,8 +6,8 @@ import { faMoon, faSun } from "@fortawesome/free-solid-svg-icons";
 export const ThemeButton = () => {
   const { theme, toggleTheme } = useThemeStore();
   return (
-    <Box className="absolute" left={"5"} top={"5"}>
-      <IconButton variant="ghost" onClick={toggleTheme}>
+    <Box>
+      <IconButton variant="soft" onClick={toggleTheme}>
         <FontAwesomeIcon
           color={theme === "dark" ? "white" : "gold"}
           icon={theme === "dark" ? faMoon : faSun}

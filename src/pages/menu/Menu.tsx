@@ -9,17 +9,20 @@ const Menu = () => {
   const { isError, isLoading, data: products } = useGetProducts();
 
   return (
-    <Flex direction="column" align="center">
+    <Flex direction="column" align="center" width="100%">
       <Flex
         direction="column"
         align="center"
         overflow="auto"
         justify="center"
         gap="2"
+        width="100%"
       >
-        <ThemeButton />
-        <Logo />
-        <Cart />
+        <Flex width="100%" justify="between" align="start">
+          <ThemeButton />
+          <Logo />
+          <Cart />
+        </Flex>
         <Heading size="5">MENÚ</Heading>
 
         {products && products.length < 1 && <Text>No tiene productos</Text>}

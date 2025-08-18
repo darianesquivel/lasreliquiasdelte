@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter } from "react-router-dom";
 import "./index.css";
 import "@radix-ui/themes/styles.css";
+import { ToastContainer } from "react-toastify";
 
 import { useThemeStore } from "./store/theme-store";
 
@@ -19,6 +20,7 @@ function Root() {
       <QueryClientProvider client={queryClient}>
         <BrowserRouter>
           <App />
+          <ToastContainer theme={theme} />
         </BrowserRouter>
       </QueryClientProvider>
     </Theme>

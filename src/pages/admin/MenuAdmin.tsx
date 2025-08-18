@@ -17,6 +17,7 @@ import { CreateProduct } from "../../components/products/CreateProduct";
 import { CreateCategory } from "../../components/categories/CreateCategory";
 import { DeleteCategory } from "../../components/categories/DeleteCategory";
 import { EditCategory } from "../../components/categories/EditCategory";
+import { ThemeButton } from "../../components/theme/ThemeButton";
 
 function MenuAdmin() {
   const { data: products } = useGetProducts();
@@ -31,9 +32,10 @@ function MenuAdmin() {
   );
 
   return (
-    <Flex direction={"column"} gap={"2"} px={"5"}>
+    <Flex direction={"column"} gap={"2"} width="100%">
+      <ThemeButton />
       <Tabs.Root defaultValue="products">
-        <Tabs.List>
+        <Tabs.List color="orange">
           <Tabs.Trigger value="products">Productos</Tabs.Trigger>
           <Tabs.Trigger value="categories">Categorias</Tabs.Trigger>
         </Tabs.List>
@@ -113,14 +115,24 @@ function MenuAdmin() {
               <CreateCategory />
             </Flex>
 
-            <Flex direction="column">
+            <Flex direction="column" gap="4" maxWidth="300px">
               {categories?.map((category) => {
                 return (
-                  <Flex key={category.id} align="center">
-                    <Badge color={category.color}>{category.name}</Badge>
-                    <DeleteCategory id={category.id} />
-                    <EditCategory category={category} />
-                  </Flex>
+                  <Card>
+                    <Flex
+                      key={category.id}
+                      align="center"
+                      justify="between"
+                      gap="4"
+                      maxWidth={"300px"}
+                    >
+                      <Badge color={category.color}>{category.name}</Badge>
+                      <Flex gap="2">
+                        <DeleteCategory id={category.id} />
+                        <EditCategory category={category} />
+                      </Flex>
+                    </Flex>
+                  </Card>
                 );
               })}
             </Flex>

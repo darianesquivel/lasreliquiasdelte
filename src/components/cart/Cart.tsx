@@ -49,10 +49,10 @@ export const Cart = () => {
   };
 
   return (
-    <Box className="absolute" right={"5"} top={"5"}>
+    <Box>
       <Dialog.Root>
         <Dialog.Trigger>
-          <Flex position={"relative"}>
+          <Flex>
             <IconButton variant="soft">
               <FontAwesomeIcon icon={faCartShopping} />
             </IconButton>

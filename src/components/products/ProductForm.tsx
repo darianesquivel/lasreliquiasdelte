@@ -15,6 +15,7 @@ import { useGetCategories } from "../../hooks/categories/useGetCategories";
 type ProductFormProps = {
   onSave: (product: any) => void;
   product?: NewProduct;
+  isPending?: boolean;
 };
 
 const NEW_PRODUCT: NewProduct = {
@@ -31,7 +32,11 @@ const DIET_TYPES: { key: DietKey; label: string }[] = [
   { key: "isLactoseFree", label: "Sin Lactosa" },
 ];
 
-export const ProductForm = ({ onSave, product }: ProductFormProps) => {
+export const ProductForm = ({
+  onSave,
+  product,
+  isPending,
+}: ProductFormProps) => {
   const [productData, setProductData] = useState(product || NEW_PRODUCT);
   const [errors, setErrors] = useState<Record<string, string>>({});
 
@@ -190,7 +195,9 @@ export const ProductForm = ({ onSave, product }: ProductFormProps) => {
         />{" "}
         Disponible
       </Text>
-      <Button onClick={handleSave}>GUARDAR</Button>
+      <Button onClick={handleSave} loading={isPending}>
+        GUARDAR
+      </Button>
     </Flex>
   );
 };
