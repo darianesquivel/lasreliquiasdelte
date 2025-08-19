@@ -1,12 +1,4 @@
-import {
-  Avatar,
-  Badge,
-  Card,
-  Flex,
-  Tabs,
-  Text,
-  TextField,
-} from "@radix-ui/themes";
+import { Badge, Card, Flex, Tabs, Text, TextField } from "@radix-ui/themes";
 import { useGetProducts } from "../../hooks/products/useGetProducts";
 import { useGetCategories } from "../../hooks/categories/useGetCategories";
 import { EditProduct } from "../../components/products/EditProduct";
@@ -18,6 +10,7 @@ import { CreateCategory } from "../../components/categories/CreateCategory";
 import { DeleteCategory } from "../../components/categories/DeleteCategory";
 import { EditCategory } from "../../components/categories/EditCategory";
 import { ThemeButton } from "../../components/theme/ThemeButton";
+import { ProductCard } from "../../components/products/ProductCard";
 
 function MenuAdmin() {
   const { data: products } = useGetProducts();
@@ -52,58 +45,14 @@ function MenuAdmin() {
             </Flex>
 
             {filteredProducts?.map((product) => {
-              const {
-                id,
-                name,
-                description,
-                price,
-                availability,
-                category,
-                price_discount,
-              } = product;
-
               return (
-                <Card key={id}>
-                  <Flex gap="2" align="center" justify="between" p="2">
-                    <Flex gap="2" align="center">
-                      <Avatar size="6" fallback />
-                      <Flex direction="column" maxWidth="500px">
-                        <Text
-                          className="line-clamp-1 overflow-hidden text-ellipsis"
-                          size="4"
-                          weight="bold"
-                        >
-                          {name}
-                        </Text>
-                        <Text
-                          truncate
-                          className="line-clamp-2 overflow-hidden text-ellipsis"
-                          size="3"
-                          weight="light"
-                        >
-                          {description}
-                        </Text>
-
-                        <Text>Precio: $ {price}</Text>
-                        {price_discount && (
-                          <Text>Precio oferta: $ {price_discount}</Text>
-                        )}
-
-                        <Text>Disponible: {availability ? "Si" : "No"}</Text>
-                        <Text>
-                          Categoria:
-                          <Badge color={category?.color}>
-                            {category?.name}
-                          </Badge>
-                        </Text>
-                      </Flex>
-                    </Flex>
-                    <Flex gap="4">
-                      <EditProduct product={product} />
-                      <DeleteProduct id={id} />
-                    </Flex>
+                <Flex gap="2" align="center">
+                  <ProductCard key={product.id} product={product} />
+                  <Flex direction="column" gap="4">
+                    <EditProduct product={product} />
+                    <DeleteProduct id={product.id} />
                   </Flex>
-                </Card>
+                </Flex>
               );
             })}
           </Flex>
@@ -118,21 +67,25 @@ function MenuAdmin() {
             <Flex direction="column" gap="4" maxWidth="300px">
               {categories?.map((category) => {
                 return (
-                  <Card>
-                    <Flex
-                      key={category.id}
-                      align="center"
-                      justify="between"
-                      gap="4"
-                      maxWidth={"300px"}
-                    >
-                      <Badge color={category.color}>{category.name}</Badge>
-                      <Flex gap="2">
-                        <DeleteCategory id={category.id} />
-                        <EditCategory category={category} />
+                  <Flex gap="2" align="center">
+                    <Card>
+                      <Flex
+                        key={category.id}
+                        align="center"
+                        justify="between"
+                        gap="4"
+                        width={"300px"}
+                        height={"30px"}
+                      >
+                        <Badge color={category.color}>{category.name}</Badge>
+                        <Flex gap="2"></Flex>
                       </Flex>
+                    </Card>
+                    <Flex direction="column" gap="1">
+                      <DeleteCategory id={category.id} />
+                      <EditCategory category={category} />
                     </Flex>
-                  </Card>
+                  </Flex>
                 );
               })}
             </Flex>
