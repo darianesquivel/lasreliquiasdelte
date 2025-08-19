@@ -189,7 +189,16 @@ export const ProductForm = ({
       </Text>
 
       <Text size="1" as="label">
+        Imagen
+        <TextField.Root
+          value={productData.imageUrl}
+          onChange={(e) => handleInputChange("imageUrl", e.target.value)}
+        />
+      </Text>
+
+      <Text size="1" as="label">
         <Switch
+          defaultChecked
           checked={productData.availability}
           onCheckedChange={(value) => handleInputChange("availability", value)}
         />{" "}

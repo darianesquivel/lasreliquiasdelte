@@ -55,68 +55,72 @@ export const ProductCard = ({ product }: ProductCardProps) => {
   return (
     <Dialog.Root>
       <Dialog.Trigger>
-        <Box width="100%">
+        <Box width={{ initial: "100%", md: "600px" }}>
           <Card>
-            <Flex gap="4" align="center">
-              {/* IMAGE */}
-              <Flex>
-                <Avatar size="7" fallback src={imageUrl} />
-              </Flex>
+            <Flex gap="4" align="center" justify="between">
+              <Flex gap="2">
+                {/* IMAGE */}
+                <Flex>
+                  <Avatar size="7" fallback src={imageUrl} />
+                </Flex>
 
-              {/* NAME - DESCRIPTION - PRICE - PRICE DISCOUNT */}
-              <Flex direction="column" gap="1">
-                {category && (
-                  <Badge className="max-w-min" color={category.color} size="1">
-                    {category.name}
-                  </Badge>
-                )}
-
-                <Text
-                  className="line-clamp-1 text-ellipsis"
-                  size="2"
-                  weight="bold"
-                >
-                  {name}
-                </Text>
-                <Text
-                  className="line-clamp-2  text-ellipsis"
-                  size="1"
-                  weight="light"
-                >
-                  {description}
-                </Text>
-
-                <Flex gap="2">
-                  {price_discount && (
-                    <Text color="green" weight="bold" size="1">
-                      ${price_discount}
-                    </Text>
+                {/* NAME - DESCRIPTION - PRICE - PRICE DISCOUNT */}
+                <Flex direction="column" gap="1">
+                  {category && (
+                    <Badge
+                      className="max-w-min"
+                      color={category.color}
+                      size="1"
+                    >
+                      {category.name}
+                    </Badge>
                   )}
 
                   <Text
-                    className={
-                      price_discount ? "line-through text-gray-400" : ""
-                    }
-                    weight={price_discount ? "light" : "bold"}
-                    size="1"
+                    className="line-clamp-1 text-ellipsis"
+                    size="2"
+                    weight="bold"
                   >
-                    ${price}
+                    {name}
                   </Text>
+                  <Text
+                    className="line-clamp-2  text-ellipsis"
+                    size="1"
+                    weight="light"
+                  >
+                    {description}
+                  </Text>
+
+                  <Flex gap="2">
+                    {price_discount && (
+                      <Text color="green" weight="bold" size="1">
+                        ${price_discount}
+                      </Text>
+                    )}
+
+                    <Text
+                      className={
+                        price_discount ? "line-through text-gray-400" : ""
+                      }
+                      weight={price_discount ? "light" : "bold"}
+                      size="1"
+                    >
+                      ${price}
+                    </Text>
+                  </Flex>
                 </Flex>
               </Flex>
 
               {/* TAGS */}
               <Flex gap="2" direction="column" align="end">
                 {isNewProduct && (
-                  <Badge className="max-w-min" color="mint" radius="full">
+                  <Badge className="max-w-min" color="mint">
                     New
                   </Badge>
                 )}
 
                 {percentDiscount && (
-                  <Badge color="orange" radius="full">
-                    {percentDiscount}% OFF
-                  </Badge>
+                  <Badge color="orange">{percentDiscount}% OFF</Badge>
                 )}
 
                 <Flex direction="column" gap="1">

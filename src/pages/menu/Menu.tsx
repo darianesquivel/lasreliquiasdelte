@@ -4,6 +4,8 @@ import { useGetProducts } from "../../hooks/products/useGetProducts";
 import { Cart } from "../../components/cart/Cart";
 import { ThemeButton } from "../../components/theme/ThemeButton";
 import { Logo } from "../../components/logo/Logo";
+import { DietType } from "../../components/products/DietTypes";
+import { NoProducts } from "../../components/products/NoProducts";
 
 const Menu = () => {
   const { isError, isLoading, data: products } = useGetProducts();
@@ -23,9 +25,12 @@ const Menu = () => {
           <Logo />
           <Cart />
         </Flex>
+
         <Heading size="5">MENÚ</Heading>
 
-        {products && products.length < 1 && <Text>No tiene productos</Text>}
+        <DietType />
+
+        {products && products.length < 1 && <NoProducts />}
 
         {isLoading && (
           <Flex>
