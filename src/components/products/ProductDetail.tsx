@@ -47,7 +47,7 @@ export const ProductDetail = ({ product }: ProductDetailProps) => {
       justify="center"
       align="center"
       gap="2"
-      width={"100%"}
+      width="100%"
     >
       {/* IMAGE */}
       <Inset side="top">
@@ -65,7 +65,7 @@ export const ProductDetail = ({ product }: ProductDetailProps) => {
       </Inset>
 
       {/* NAME & DESCRIPTION & PRICE */}
-      <Text weight={"bold"} size={"4"}>
+      <Text weight="bold" size="4">
         {name}
       </Text>
       <Text weight="light" size="2">
@@ -96,14 +96,14 @@ export const ProductDetail = ({ product }: ProductDetailProps) => {
             <Flex align="center" gap="4">
               <IconButton
                 disabled={count < 2}
-                size={"1"}
+                size="1"
                 variant="ghost"
                 onClick={handleSubCount}
               >
                 <FontAwesomeIcon icon={faMinus} />
               </IconButton>
-              <Badge size={"2"}>{count}</Badge>
-              <IconButton size={"1"} variant="ghost" onClick={handleAddCount}>
+              <Badge size="2">{count}</Badge>
+              <IconButton size="1" variant="ghost" onClick={handleAddCount}>
                 <FontAwesomeIcon icon={faPlus} />
               </IconButton>
             </Flex>
@@ -119,7 +119,7 @@ export const ProductDetail = ({ product }: ProductDetailProps) => {
           radius="full"
           size="3"
         >
-          <Flex justify={"between"} width={"100%"}>
+          <Flex justify="between" width="100%">
             <Badge variant="outline" highContrast>
               {count}
             </Badge>

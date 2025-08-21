@@ -201,7 +201,7 @@ export const ProductForm = ({
           defaultChecked
           checked={productData.availability}
           onCheckedChange={(value) => handleInputChange("availability", value)}
-        />{" "}
+        />
         Disponible
       </Text>
       <Button onClick={handleSave} loading={isPending}>

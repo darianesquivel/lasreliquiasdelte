@@ -47,7 +47,7 @@ export const EditCategory = ({ category }: EditCategoryProps) => {
   return (
     <Dialog.Root open={open} onOpenChange={setOpen}>
       <Dialog.Trigger>
-        <IconButton size={"1"} radius="full">
+        <IconButton size="1" radius="full">
           <FontAwesomeIcon size="xs" icon={faEdit} />
         </IconButton>
       </Dialog.Trigger>

@@ -7,5 +7,5 @@ export function Logo() {
 
   const logoSrc = theme === "dark" ? whiteLogo : blackLogo;
 
-  return <img src={logoSrc} alt="Logo" width={"100px"} />;
+  return <img src={logoSrc} alt="Logo" width="100px" />;
 }

@@ -25,7 +25,7 @@ export const DietType = () => {
         <Flex direction="column" align="center">
           <Text color="sky" size="2" weight="bold">
             LF
-          </Text>{" "}
+          </Text>
           <Text size="1" align="center">
             Lactora Free
           </Text>

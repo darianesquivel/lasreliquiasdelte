@@ -8,6 +8,7 @@ import {
   IconButton,
   VisuallyHidden,
   Box,
+  Inset,
 } from "@radix-ui/themes";
 import { type Product } from "../../types/product";
 import { ProductDetail } from "./ProductDetail";
@@ -60,9 +61,7 @@ export const ProductCard = ({ product }: ProductCardProps) => {
             <Flex gap="4" align="center" justify="between">
               <Flex gap="2">
                 {/* IMAGE */}
-                <Flex>
-                  <Avatar size="7" fallback src={imageUrl} />
-                </Flex>
+                <Avatar size="7" fallback src={imageUrl} radius="small" />
 
                 {/* NAME - DESCRIPTION - PRICE - PRICE DISCOUNT */}
                 <Flex direction="column" gap="1">
@@ -155,10 +154,10 @@ export const ProductCard = ({ product }: ProductCardProps) => {
           <VisuallyHidden asChild>Product detail</VisuallyHidden>
         </Dialog.Title>
 
-        <Flex direction={"column"} align={"center"} gap={"6"}>
+        <Flex direction="column" align="center" gap="6">
           <ProductDetail product={product} />
           <Dialog.Close>
-            <IconButton size={"1"} radius="full" color="red">
+            <IconButton size="1" radius="full" color="red">
               <FontAwesomeIcon size="xs" icon={faXmark} />
             </IconButton>
           </Dialog.Close>

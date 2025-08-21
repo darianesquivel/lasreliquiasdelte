@@ -66,26 +66,26 @@ export const Cart = () => {
         <Dialog.Content>
           <Dialog.Title>TU CARRITO</Dialog.Title>
           <Dialog.Description></Dialog.Description>
-          <Flex direction={"column"} align={"center"} gap={"3"}>
+          <Flex direction="column" align="center" gap="3">
             <FontAwesomeIcon icon={faCartShopping} />
-            <Flex direction={"column"} gap={"2"}>
+            <Flex direction="column" gap="2">
               {items.length > 0 &&
                 items.map((item) => {
                   return (
-                    <Flex key={item.id} gap={"4"} align={"center"}>
+                    <Flex key={item.id} gap="4" align="center">
                       <Avatar fallback src={item.imageUrl} />
-                      <Text size={"1"}>{item.name}</Text>
-                      <Text size={"1"}>x{item.quantity}</Text>
-                      <Flex gap={"2"}>
+                      <Text size="1">{item.name}</Text>
+                      <Text size="1">x{item.quantity}</Text>
+                      <Flex gap="2">
                         <IconButton
-                          size={"2"}
+                          size="2"
                           variant="ghost"
                           onClick={() => removeItem(item.name)}
                         >
                           <FontAwesomeIcon icon={faMinus} />
                         </IconButton>
                         <IconButton
-                          size={"2"}
+                          size="2"
                           variant="ghost"
                           onClick={() => incrementItem(item.name)}
                         >
@@ -94,7 +94,7 @@ export const Cart = () => {
 
                         <IconButton
                           onClick={() => removeProduct(item.name)}
-                          size={"1"}
+                          size="1"
                           variant="ghost"
                         >
                           <FontAwesomeIcon icon={faTrashAlt} />
@@ -105,11 +105,9 @@ export const Cart = () => {
                 })}
             </Flex>
             {!items.length && <Text>No tienes productos</Text>}
-            {totalPrice > 0 && (
-              <Text weight={"bold"}>Total: ${totalPrice}</Text>
-            )}
+            {totalPrice > 0 && <Text weight="bold">Total: ${totalPrice}</Text>}
             {items.length > 0 && (
-              <Flex direction={"column"} gap={"2"}>
+              <Flex direction="column" gap="2">
                 <Button radius="full" color="red" onClick={clearCart}>
                   Eliminar carrito <FontAwesomeIcon icon={faTrashAlt} />
                 </Button>
@@ -120,7 +118,7 @@ export const Cart = () => {
               </Flex>
             )}
             <Dialog.Close>
-              <IconButton size={"1"} radius="full" color="red">
+              <IconButton size="1" radius="full" color="red">
                 <FontAwesomeIcon size="xs" icon={faXmark} />
               </IconButton>
             </Dialog.Close>

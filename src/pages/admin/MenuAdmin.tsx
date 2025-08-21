@@ -25,7 +25,7 @@ function MenuAdmin() {
   );
 
   return (
-    <Flex direction={"column"} gap={"2"} width="100%">
+    <Flex direction="column" gap="2" width="100%" height="100vh">
       <ThemeButton />
       <Tabs.Root defaultValue="products">
         <Tabs.List color="orange">
@@ -33,7 +33,7 @@ function MenuAdmin() {
           <Tabs.Trigger value="categories">Categorias</Tabs.Trigger>
         </Tabs.List>
         <Tabs.Content value="products">
-          <Flex direction="column" gap="4" p="4">
+          <Flex direction="column" gap="4">
             <Text weight="bold">ADMINISTRAR PRODUCTOS</Text>
             <Flex gap="2">
               <TextField.Root
@@ -46,7 +46,7 @@ function MenuAdmin() {
 
             {filteredProducts?.map((product) => {
               return (
-                <Flex gap="2" align="center">
+                <Flex gap="2" align="center" width="100%">
                   <ProductCard key={product.id} product={product} />
                   <Flex direction="column" gap="4">
                     <EditProduct product={product} />
@@ -58,7 +58,7 @@ function MenuAdmin() {
           </Flex>
         </Tabs.Content>
         <Tabs.Content value="categories">
-          <Flex direction="column" gap="4" p="4">
+          <Flex direction="column" gap="4">
             <Text weight="bold">ADMINISTRAR CATEGORIAS</Text>
             <Flex>
               <CreateCategory />
@@ -67,15 +67,15 @@ function MenuAdmin() {
             <Flex direction="column" gap="4" maxWidth="300px">
               {categories?.map((category) => {
                 return (
-                  <Flex gap="2" align="center">
+                  <Flex gap="2">
                     <Card>
                       <Flex
                         key={category.id}
                         align="center"
                         justify="between"
                         gap="4"
-                        width={"300px"}
-                        height={"30px"}
+                        width="300px"
+                        height="30px"
                       >
                         <Badge color={category.color}>{category.name}</Badge>
                         <Flex gap="2"></Flex>

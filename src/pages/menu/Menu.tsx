@@ -10,6 +10,8 @@ import { NoProducts } from "../../components/products/NoProducts";
 const Menu = () => {
   const { isError, isLoading, data: products } = useGetProducts();
 
+  console.log("PRODUCTS => ", products);
+
   return (
     <Flex direction="column" align="center" width="100%">
       <Flex

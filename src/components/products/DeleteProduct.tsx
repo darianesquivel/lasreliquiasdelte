@@ -22,7 +22,7 @@ export const DeleteProduct = ({ id }: DeleteProductProps) => {
   return (
     <AlertDialog.Root>
       <AlertDialog.Trigger>
-        <IconButton radius="full" size={"1"} color="red">
+        <IconButton radius="full" size="1" color="red">
           <FontAwesomeIcon size="xs" icon={faTrash} />
         </IconButton>
       </AlertDialog.Trigger>
