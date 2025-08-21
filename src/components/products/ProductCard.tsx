@@ -8,7 +8,6 @@ import {
   IconButton,
   VisuallyHidden,
   Box,
-  Inset,
 } from "@radix-ui/themes";
 import { type Product } from "../../types/product";
 import { ProductDetail } from "./ProductDetail";
